@@ -100,7 +100,7 @@ fun WoofApp() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WoofTopAppBar(modifier: Modifier = Modifier) {
-    CenterAlignedTopAppBar(title = { /*TODO*/
+    CenterAlignedTopAppBar(title = {
         Row (
             verticalAlignment = Alignment.CenterVertically
         ) {
