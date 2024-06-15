@@ -149,15 +149,27 @@ fun DogItem(
     }
 
     Card {
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
+        Column {
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
                 //.padding(dimensionResource(R.dimen.padding_small))
-        ) {
-            DogIcon(dog.imageResourceId)
-            DogInformation(dog.name, dog.age)
-            Spacer(modifier = Modifier.weight(1f))
-            DogItemButton(expanded = expanded, onClick = { /*TODO*/ })
+            ) {
+                DogIcon(dog.imageResourceId)
+                DogInformation(dog.name, dog.age)
+                Spacer(modifier = Modifier.weight(1f))
+                DogItemButton(expanded = expanded, onClick = { /*TODO*/ })
+            }
+            DogHobby(
+                dogHobby = dog.hobbies,
+                modifier = Modifier.padding(
+                    start = dimensionResource(id = R.dimen.padding_medium),
+                    top = dimensionResource(id = R.dimen.padding_small),
+                    bottom = dimensionResource(id = R.dimen.padding_medium),
+                    end = dimensionResource(id = R.dimen.padding_medium)
+                )
+
+            )
         }
     }
 }
@@ -179,9 +191,26 @@ private fun DogItemButton(
         )
 
     }
-
 }
 
+@Composable
+fun DogHobby(
+    @StringRes dogHobby: Int,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+    ) {
+        Text(
+            text = stringResource(id = R.string.about),
+            style = MaterialTheme.typography.labelSmall
+        )
+        Text(
+            text = stringResource(id = dogHobby),
+            style = MaterialTheme.typography.bodyLarge
+        )
+    }
+}
 /**
  * Composable that displays a photo of a dog.
  *
