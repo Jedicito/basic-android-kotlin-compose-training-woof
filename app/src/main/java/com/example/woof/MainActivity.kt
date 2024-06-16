@@ -66,12 +66,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.woof.data.Dog
 import com.example.woof.data.dogs
 import com.example.woof.ui.theme.WoofTheme
 import com.example.woof.ui.theme.md_theme_light_outline
+import androidx.compose.ui.semantics.traversalIndex
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -175,6 +178,7 @@ fun DogItem(
                     .fillMaxWidth()
                 //.padding(dimensionResource(R.dimen.padding_small))
             ) {
+
                 DogIcon(dog.imageResourceId)
                 DogInformation(dog.name, dog.age)
                 Spacer(modifier = Modifier.weight(1f))
@@ -211,7 +215,7 @@ private fun DogItemButton(
     ) {
         Icon(
             imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
-            contentDescription = null,
+            contentDescription = stringResource(id = R.string.expand_button_content_description),
             tint = MaterialTheme.colorScheme.secondary
         )
 
@@ -275,7 +279,7 @@ fun DogInformation(
     dogAge: Int,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.semantics(mergeDescendants = true, properties = {})) {
         Text(
             text = stringResource(dogName),
             style = MaterialTheme.typography.displayMedium,
